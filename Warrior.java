@@ -1,7 +1,10 @@
 public class Warrior extends Player {
+    private int cooldown = 0;
+    private int maxCooldown;
     public Warrior(String name, int healthPool, int atkPoints, int defPoints, int maxCooldown) {
         super(name, healthPool, atkPoints, defPoints);
-        ability = new  WarriorAbility(maxCooldown);
+        ability = new  WarriorAbility();
+        this.maxCooldown = maxCooldown;
     }
     public void cast(){
         super.cast();
@@ -9,12 +12,14 @@ public class Warrior extends Player {
     }
     public void levelUp(){
         super.levelUp();
-        ((WarriorAbility) ability).setCooldown(0);
+        cooldown = 0;
         setHealthPool(getHealthPool() + (level * 5));
         setAtkPts(getAtkPts() + (level * 2));
         setDefPts(getDefPts() + level);
     }
     public void updateGameTick(){
-        ((WarriorAbility) ability).setCooldown(((WarriorAbility) ability).getCooldown() - 1);
+        if(cooldown > 0){
+            cooldown--;
+        }
     }
 }
