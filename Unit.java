@@ -115,5 +115,8 @@ protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, P
 
     public abstract void updateGameTick();
 
+    //returns the full status of the unit (override in each subclass).
+    //Used during combat and on the player’s turn.
+    public abstract String description();
 
 }
