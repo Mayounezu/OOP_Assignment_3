@@ -6,8 +6,8 @@ public abstract class Player extends Unit
 
     protected Player(String name, int healthPool, int atkPoints, int defPoints, Position position, Ability ability)
     {
+        super(name,'@', healthPool, atkPoints, defPoints, position);
         this.ability = ability;
-        super(name, healthPool, atkPoints, defPoints, position);
     }
     public void levelUp(){
         experience -= (50 * level);
