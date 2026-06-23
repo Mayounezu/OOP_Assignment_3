@@ -48,6 +48,7 @@ public abstract class Unit{
     public void setHealthAmount(int healthAmount) {
         if (healthAmount < 0) {
             this.healthAmount = 0;
+            this.death();
         } else if (healthAmount > healthPool) {
             this.healthAmount = healthPool;
         } else {
@@ -64,4 +65,27 @@ public abstract class Unit{
     }
 
     public abstract void updateGameTick();
+
+    public void visit(Floor floor){
+        if (floor.getOccupant() == null) {
+            floor.setOccupant(this);
+        } else {
+            floor.getOccupant().accept(this);
+        }
+    }
+    public void visit(Wall wall){
+        throw new IllegalStateException("Cannot place a unit on a wall");
+    }
+
+    public void visit(Player player){
+
+    }
+
+    public void startBattle(Unit enemy){
+        int damage = this.atkPts - enemy.getDefPts();
+        if (damage < 0) {
+            damage = 0;
+        }
+        enemy.setHealthAmount(enemy.getHealthAmount() - damage);
+    }
 }
