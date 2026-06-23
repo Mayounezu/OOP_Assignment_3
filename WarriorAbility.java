@@ -1,9 +1,10 @@
+import java.util.List;
 public class WarriorAbility implements Ability {
     private int healthPool;
     public WarriorAbility(int healthPool) {
         this.healthPool = healthPool;
     }
-    public void cast(Position position) {
+    public void cast(Position position, List<Enemy> enemies) {
         return;
     }
 }

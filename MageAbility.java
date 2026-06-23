@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 public class MageAbility implements Ability {
     private int hitCount;
     private int spellPower;
@@ -7,10 +9,17 @@ public class MageAbility implements Ability {
         this.spellPower = spellPower;
         this.range = range;
     }
-    public void cast(Position position) {
+    public void cast(Position position, List<Enemy> enemies) {
         int hits = 0;
-        while (hits < this.hitCount && ) {
-            //hit enemy in range
+        List<Enemy> enemiesToCast = new ArrayList<>();
+        for(Enemy  e: enemies){
+            if(e.getPosition().distance(position) <= range){
+                enemiesToCast.add(e);
+            }
+        }
+        while (hits < this.hitCount && enemiesToCast.size() > 0) {
+            int enemyIndex = (int)(Math.random() * enemies.size());
+            enemiesToCast.get(enemyIndex).dealDamage(spellPower);
             hits++;
         }
     }

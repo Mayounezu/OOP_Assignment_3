@@ -1,8 +1,9 @@
+import java.util.List;
 public class Warrior extends Player {
     private int cooldown = 0;
     private int maxCooldown;
-    public Warrior(String name, int healthPool, int atkPoints, int defPoints, int maxCooldown, Position position) {
-        super(name, healthPool, atkPoints, defPoints, position, new WarriorAbility(healthPool));
+    public Warrior(String name, int healthPool, int atkPoints, int defPoints, int maxCooldown, Position position, List<Enemy> enemies) {
+        super(name, healthPool, atkPoints, defPoints, position, new WarriorAbility(healthPool), enemies);
         this.maxCooldown = maxCooldown;
     }
     public void cast(){
