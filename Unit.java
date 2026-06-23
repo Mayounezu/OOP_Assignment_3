@@ -25,9 +25,6 @@ protected Unit(String name, int healthPool, int atkPts, int defPts, Position pos
     public Position getPosition() {
         return position;
     }
-
-
-
     public void setPosition(Position p) {
         this.position = p;
     }
@@ -99,5 +96,9 @@ protected Unit(String name, int healthPool, int atkPts, int defPts, Position pos
             damage = 0;
         }
         enemy.setHealthAmount(enemy.getHealthAmount() - damage);
+    }
+
+    public void updateGameTick(){
+    
     }
 }
