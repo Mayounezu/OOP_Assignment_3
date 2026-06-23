@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Monster extends Enemy {
+public class Monster extends Enemy {
 
     private int visionRange; // The radius in which the monster spots the player
 
@@ -64,5 +64,20 @@ public abstract class Monster extends Enemy {
             case 3: return new Position(myPos.getX(), myPos.getY() + 1); // Move Down
             default: return myPos; // Stay in place
         }
+    }
+
+    @Override
+    public void processTurn() {
+
+    }
+
+    @Override
+    public void updateGameTick() {
+
+    }
+
+    @Override
+    public String description() {
+        return "";
     }
 }
