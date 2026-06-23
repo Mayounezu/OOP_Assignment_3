@@ -1,9 +1,9 @@
 public abstract class Enemy extends Unit {
 
-private final int experienceValue; // Experience gained by the player when defeating this unit
+protected final int experienceValue; // Experience gained by the player when defeating this unit
 
 
-protected Enemy(String name, int healthPool, int atkPts, int defPts, int experienceValue, Position position) {
+protected Enemy(String name, int healthPool, int atkPts, int defPts, Position position, int experienceValue) {
 
 super(name, healthPool, atkPts, defPts, position);
 
