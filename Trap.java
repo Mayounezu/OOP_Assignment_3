@@ -36,9 +36,14 @@ public class Trap extends Enemy{
     @Override
     public String toString() {
         if (visible)
-            return this.tile.toString();
+            return "" + tile;
         else
             return ".";
+    }
+
+    @Override
+    public void processTurn() {
+        
     }
 
     /*
