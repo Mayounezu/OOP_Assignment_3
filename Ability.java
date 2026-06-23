@@ -1,3 +1,3 @@
 public interface Ability {
-    public void cast();
+    public void cast(Position position);
 }
