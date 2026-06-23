@@ -3,7 +3,7 @@ public class WarriorAbility implements Ability {
     public WarriorAbility(int healthPool) {
         this.healthPool = healthPool;
     }
-    public void cast(){
+    public void cast(Position position) {
         return;
     }
 }
