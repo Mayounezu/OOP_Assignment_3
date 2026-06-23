@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public abstract class Occupant {
-    private char tile;
+    protected char tile;
     public Occupant(char tile) {
         this.tile = tile;
     }
