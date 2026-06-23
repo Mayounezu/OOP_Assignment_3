@@ -9,46 +9,28 @@ public abstract class Unit{
 
 
     
-protected Unit(String name,Character tile, int healthPool, int atkPts, int defPts, Position position){
+protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
+    this.name = name;
+    this.healthAmount = healthPool;
+    if (healthPool <= 0) {
+    this.healthPool = 1;
+    } else {
+    this.healthPool = healthPool;
+    }
+    this.atkPts = atkPts;
+    this.defPts = defPts;
+    this.position = position;
+    }
 
-this.name = name;
-
-this.healthAmount = healthPool;
-
-if (healthPool <= 0) {
-
-this.healthPool = 1;
-
-} else {
-
-this.healthPool = healthPool;
-
-}
-
-this.atkPts = atkPts;
-
-this.defPts = defPts;
-
-this.position = position;
-this.tile = tile;
-
-}
-
-public Position getPosition() {
-
-return position;
-
-}
+    public Position getPosition() {
+        return position;
+    }
 
 
 
-public void setPosition(Position p) {
-
-this.position = p;
-
-}
-
-
+    public void setPosition(Position p) {
+        this.position = p;
+    }
 
     public int getAtkPts() {
         return atkPts;
@@ -103,12 +85,19 @@ this.position = p;
         if (floor.getOccupant() == null) {
             floor.setOccupant(this);
         } else {
-            throw new IllegalStateException("Cannot place a unit on a non-empty floor");
+            floor.getOccupant().accept(this);
         }
     }
-    public void visit(Wall wall){
-        throw new IllegalStateException("Cannot place a unit on a wall");
+
+    public void visit(Player player){
+
     }
-    
-    public abstract void updateGameTick();
+
+    public void startBattle(Unit enemy){
+        int damage = this.atkPts - enemy.getDefPts();
+        if (damage < 0) {
+            damage = 0;
+        }
+        enemy.setHealthAmount(enemy.getHealthAmount() - damage);
+    }
 }
