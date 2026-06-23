@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Unit{
     protected final String name;
     protected int healthPool;
@@ -5,7 +7,7 @@ public abstract class Unit{
     protected int atkPts;
     protected int defPts;
     protected Position position;
-    protected private Character tile;
+    protected Character tile;
 
 
     
@@ -86,19 +88,32 @@ protected Unit(String name, int healthPool, int atkPts, int defPts, Position pos
         }
     }
 
-    public void visit(Player player){
+    public void visit(Wall wall){
+        throw new IllegalArgumentException("Cannot move into a wall");
+    }
 
+    public void visit(Player player){
+        startBattle(player);
+    }
+
+    public void visit(Enemy enemy){
+        startBattle(enemy);
     }
 
     public void startBattle(Unit enemy){
-        int damage = this.atkPts - enemy.getDefPts();
-        if (damage < 0) {
-            damage = 0;
+        Random rand = new Random();
+        int atkRoll = rand.nextInt(atkPts);
+        int defRoll = rand.nextInt(enemy.getDefPts());
+        if (atkRoll > defRoll) {
+            enemy.dealDamage(atkRoll - defRoll);
         }
-        enemy.setHealthAmount(enemy.getHealthAmount() - damage);
+    }
+
+    public void dealDamage(int damage){
+        setHealthAmount(healthAmount - damage);
     }
 
     public void updateGameTick(){
-    
+
     }
 }
