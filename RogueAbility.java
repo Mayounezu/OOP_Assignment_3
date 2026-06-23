@@ -5,6 +5,10 @@ public class RogueAbility implements Ability {
         this.atkPoints = atkPoints;
     }
     public void cast(Position position, List<Enemy> enemies) {
-        return;
+        for(Enemy e :  enemies) {
+            if(e.getPosition().distance(position) <= 2) {
+                e.dealDamage(atkPoints);
+            }
+        }
     }
 }

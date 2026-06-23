@@ -14,6 +14,8 @@ public class Trap extends Enemy{
 
     //void attack(Player p){
 
+
+
     public void updateGameTick() {
         ticks_count++;
         if (visible) {
@@ -26,7 +28,18 @@ public class Trap extends Enemy{
         }
     }
 
+    @Override
+    public String description() {
+        return "An immobile enemy that toggles visibility and attacks players within range two.";
+    }
 
+    @Override
+    public String toString() {
+        if (visible)
+            return this.tile.toString();
+        else
+            return ".";
+    }
 
     /*
     void checkRange(Player p){
