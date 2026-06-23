@@ -34,5 +34,4 @@ public abstract class Player extends Unit
     public void accept(Unit unit){
         unit.visit(this);
     }
-
 }
