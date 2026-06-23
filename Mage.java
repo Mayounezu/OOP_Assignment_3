@@ -5,15 +5,14 @@ public class Mage extends Player{
     private int manaCost;
     private int spellPower;
     private int hitCount;
-    public Mage(String name, int healthPool, int atkPoints, int defPoints, int range, int manaPool, int manaCost, int spellPower, int hitCount){
-        super(name, healthPool, atkPoints, defPoints);
+    public Mage(String name, int healthPool, int atkPoints, int defPoints, int range, int manaPool, int manaCost, int spellPower, int hitCount, Position position){
+        super(name, healthPool, atkPoints, defPoints, position, new MageAbility(hitCount, spellPower, range));
         this.range = range;
         this.manaPool = manaPool;
         this.manaCost = manaCost;
         this.spellPower = spellPower;
         this.hitCount = hitCount;
         currentMana = manaPool / 4;
-        ability = new MageAbility(hitCount, spellPower, range);
     }
     public void levelUp(){
         super.levelUp();

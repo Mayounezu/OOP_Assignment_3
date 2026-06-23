@@ -4,9 +4,10 @@ public abstract class Player extends Unit
     protected int level = 1;
     protected Ability ability;
 
-    protected Player(String name, int healthPool, int atkPoints, int defPoints)
+    protected Player(String name, int healthPool, int atkPoints, int defPoints, Position position, Ability ability)
     {
-        super(name, healthPool, atkPoints, defPoints);
+        this.ability = ability;
+        super(name, healthPool, atkPoints, defPoints, position);
     }
     public void levelUp(){
         experience -= (50 * level);
@@ -24,6 +25,6 @@ public abstract class Player extends Unit
         }
     }
     public void cast(){
-        ability.cast();
+        ability.cast(position);
     }
 }

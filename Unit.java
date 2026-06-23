@@ -4,18 +4,48 @@ public abstract class Unit{
     protected int healthAmount;
     protected int atkPts;
     protected int defPts;
+    protected Position position;
 
-    protected Unit(String name, int healthPool, int atkPts, int defPts){
-        this.name = name;
-        this.healthAmount = healthPool;
-        if (healthPool <= 0) {
-            this.healthPool = 1;
-        } else {
-            this.healthPool = healthPool;
-        }
-        this.atkPts = atkPts;
-        this.defPts = defPts;
-    }
+    
+protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
+
+this.name = name;
+
+this.healthAmount = healthPool;
+
+if (healthPool <= 0) {
+
+this.healthPool = 1;
+
+} else {
+
+this.healthPool = healthPool;
+
+}
+
+this.atkPts = atkPts;
+
+this.defPts = defPts;
+
+this.position = position;
+
+}
+
+public Position getPosition() {
+
+return position;
+
+}
+
+
+
+public void setPosition(Position p) {
+
+this.position = p;
+
+}
+
+
 
     public int getAtkPts() {
         return atkPts;
@@ -48,7 +78,6 @@ public abstract class Unit{
     public void setHealthAmount(int healthAmount) {
         if (healthAmount < 0) {
             this.healthAmount = 0;
-            this.death();
         } else if (healthAmount > healthPool) {
             this.healthAmount = healthPool;
         } else {
@@ -64,28 +93,16 @@ public abstract class Unit{
         }
     }
 
-    public abstract void updateGameTick();
-
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {
             floor.setOccupant(this);
         } else {
-            floor.getOccupant().accept(this);
+            throw new IllegalStateException("Cannot place a unit on a non-empty floor");
         }
     }
     public void visit(Wall wall){
         throw new IllegalStateException("Cannot place a unit on a wall");
     }
-
-    public void visit(Player player){
-
-    }
-
-    public void startBattle(Unit enemy){
-        int damage = this.atkPts - enemy.getDefPts();
-        if (damage < 0) {
-            damage = 0;
-        }
-        enemy.setHealthAmount(enemy.getHealthAmount() - damage);
-    }
+    
+    public abstract void updateGameTick();
 }

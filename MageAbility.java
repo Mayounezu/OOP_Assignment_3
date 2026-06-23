@@ -7,7 +7,7 @@ public class MageAbility implements Ability {
         this.spellPower = spellPower;
         this.range = range;
     }
-    public void cast(){
+    public void cast(Position position) {
         int hits = 0;
         while (hits < this.hitCount && ) {
             //hit enemy in range
