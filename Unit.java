@@ -5,6 +5,14 @@ public class Unit{
     private int atkPts;
     private int defPts;
 
+    public Unit(String name, int healthPool, int atkPts, int defPts){
+        this.name = name;
+        this.healthPool = healthPool;
+        this.healthAmount = healthPool;
+        this.atkPts = atkPts;
+        this.defPts = defPts;
+    }
+
     public int getAtkPts() {
         return atkPts;
     }
