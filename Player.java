@@ -8,7 +8,7 @@ public abstract class Player extends Unit
 
     protected Player(String name, '@', int healthPool, int atkPoints, int defPoints, Position position, Ability ability, List<Enemy> enemies)
     {
-        super(name, healthPool, atkPoints, defPoints, position);
+        super(name,'@', healthPool, atkPoints, defPoints, position);
         this.enemies = enemies;
         this.ability = ability;
     }
