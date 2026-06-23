@@ -1,9 +1,9 @@
 public abstract class Unit{
-    private final String name;
-    private int healthPool;
-    private int healthAmount;
-    private int atkPts;
-    private int defPts;
+    protected final String name;
+    protected int healthPool;
+    protected int healthAmount;
+    protected int atkPts;
+    protected int defPts;
 
     protected Unit(String name, int healthPool, int atkPts, int defPts){
         this.name = name;
