@@ -1,14 +1,18 @@
-public class Unit{
-    private String name;
+public abstract class Unit{
+    private final String name;
     private int healthPool;
     private int healthAmount;
     private int atkPts;
     private int defPts;
 
-    public Unit(String name, int healthPool, int atkPts, int defPts){
+    protected Unit(String name, int healthPool, int atkPts, int defPts){
         this.name = name;
-        this.healthPool = healthPool;
         this.healthAmount = healthPool;
+        if (healthPool <= 0) {
+            this.healthPool = 1;
+        } else {
+            this.healthPool = healthPool;
+        }
         this.atkPts = atkPts;
         this.defPts = defPts;
     }
@@ -42,14 +46,20 @@ public class Unit{
     }
 
     public void setHealthAmount(int healthAmount) {
-        this.healthAmount = healthAmount;
+        if (healthAmount < 0) {
+            this.healthAmount = 0;
+        } else if (healthAmount > healthPool) {
+            this.healthAmount = healthPool;
+        } else {
+            this.healthAmount = healthAmount;
+        }
     }
 
     public void setHealthPool(int healthPool) {
-        this.healthPool = healthPool;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        if (healthPool <= 0) {
+            this.healthPool = 1;
+        } else {
+            this.healthPool = healthPool;
+        }
     }
 }
