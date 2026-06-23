@@ -20,4 +20,12 @@ public class GameBoard {
         getCell(position.getX(), position.getY()).getTerrain().setOccupant(occupant);
     }
 
+    public void render(){
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                System.out.print(board[y][x].getTerrain().toString());
+            }
+            System.out.println();
+        }
+    }
 }
