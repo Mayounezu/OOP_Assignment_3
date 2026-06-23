@@ -3,10 +3,13 @@ public class Warrior extends Player {
     private int maxCooldown;
     public Warrior(String name, int healthPool, int atkPoints, int defPoints, int maxCooldown) {
         super(name, healthPool, atkPoints, defPoints);
-        ability = new  WarriorAbility();
+        ability = new  WarriorAbility(healthPool);
         this.maxCooldown = maxCooldown;
     }
     public void cast(){
+        if(cooldown > 0){
+            throw new RuntimeException("Avenger's Shield is on cooldown");
+        }
         super.cast();
         setHealthAmount(Math.min(getHealthAmount() + 10 * getDefPts(), getHealthPool()));
     }

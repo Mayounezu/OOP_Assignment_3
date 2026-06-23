@@ -8,7 +8,7 @@ public abstract class Player extends Unit
     {
         super(name, healthPool, atkPoints, defPoints);
     }
-    protected void levelUp(){
+    public void levelUp(){
         experience -= (50 * level);
         level++;
         setHealthPool(getHealthPool() + (level * 10));
