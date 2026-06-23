@@ -9,4 +9,15 @@ public class Wall implements Terrain {
     public String toString() {
         return "" + tile;
     }
+
+    @Override
+    public void setOccupant(Occupant occupant) {
+        throw new IllegalStateException("Cannot place a unit on a wall");
+    }
+
+    @Override
+    public Occupant getOccupant() {
+        return null;
+    }
+
 }

@@ -20,4 +20,9 @@ public class Rogue extends Player {
     public void updateGameTick(){
         energy = Math.min(energy + 10, 100);
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }

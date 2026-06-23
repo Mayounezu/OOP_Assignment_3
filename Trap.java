@@ -43,7 +43,7 @@ public class Trap extends Enemy{
 
     @Override
     public void processTurn() {
-        
+
     }
 
     /*

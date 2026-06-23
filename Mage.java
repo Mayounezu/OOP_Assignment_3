@@ -24,6 +24,12 @@ public class Mage extends Player{
     public void updateGameTick(){
         currentMana = Math.min(currentMana + level, manaPool);
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
+
     public void cast(){
         if(currentMana < manaCost){
             throw new RuntimeException("Not enough mana for Blizzard");
