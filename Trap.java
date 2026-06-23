@@ -4,8 +4,8 @@ public class Trap extends Enemy{
     private int ticks_count;
     private boolean visible;
 
-    Trap(String name,String tile, int healthPool, int atkPts, int defPts,int experience_value ,int visibility_time,int invisibility_time) {
-        super(name,  healthPool,  atkPts,  defPts, experience_value);
+    Trap(String name,Character tile, int healthPool, int atkPts, int defPts,int experience_value ,int visibility_time,int invisibility_time, Position position) {
+        super(name, tile, healthPool,  atkPts,  defPts, experience_value, position);
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
         this.ticks_count = 0;
@@ -14,14 +14,15 @@ public class Trap extends Enemy{
 
     //void attack(Player p){
 
-    public void updateGameTick(){
+    public void updateGameTick() {
         ticks_count++;
-        if(visible){
-            if(ticks_count == visibility_time)
-                    visible = false;
-        else{
-            if(ticks_count == invisibility_time)
-                visible = true;
+        if (visible) {
+            if (ticks_count == visibility_time)
+                visible = false;
+            else {
+                if (ticks_count == invisibility_time)
+                    visible = true;
+            }
         }
     }
 
@@ -33,6 +34,5 @@ public class Trap extends Enemy{
             attack()
     }
      */
-
 
 }
