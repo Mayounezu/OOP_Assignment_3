@@ -1,13 +1,16 @@
+import java.util.List;
 public abstract class Player extends Unit
 {
     protected int experience = 0;
     protected int level = 1;
     protected Ability ability;
+    protected List<Enemy> enemies;
 
-    protected Player(String name, int healthPool, int atkPoints, int defPoints, Position position, Ability ability)
+    protected Player(String name, '@', int healthPool, int atkPoints, int defPoints, Position position, Ability ability, List<Enemy> enemies)
     {
-        this.ability = ability;
         super(name, healthPool, atkPoints, defPoints, position);
+        this.enemies = enemies;
+        this.ability = ability;
     }
     public void levelUp(){
         experience -= (50 * level);
@@ -25,6 +28,6 @@ public abstract class Player extends Unit
         }
     }
     public void cast(){
-        ability.cast(position);
+        ability.cast(position, enemies);
     }
 }

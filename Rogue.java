@@ -1,8 +1,9 @@
+import java.util.List;
 public class Rogue extends Player {
     private int energy = 100;
     private int cost;
-    public Rogue(String name, int healthPool, int atkPoints, int defPoints,int cost, Position position) {
-        super(name, healthPool, atkPoints, defPoints,  position, new RogueAbility(atkPoints));
+    public Rogue(String name, int healthPool, int atkPoints, int defPoints,int cost, Position position, List<Enemy> enemies) {
+        super(name, healthPool, atkPoints, defPoints,  position, new RogueAbility(atkPoints), enemies);
         this.cost = cost;
     }
     public void levelUp() {
