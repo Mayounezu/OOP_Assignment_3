@@ -1,21 +1,15 @@
-private class Cell{
-    private final String state;
-    private Unit occupant;
+public class Cell{
+    private final Terrain terrain;
 
-    public Cell(String state) {
-        this.state = state;
-        this.occupant = null;
+    public Cell(Terrain terrain) {
+        this.terrain = terrain;
     }
 
-    public String getState() {
-        return state;
+    public Terrain getTerrain() {
+        return terrain;
     }
 
-    public void setOccupant(Unit occupant) {
-        if (state.equals("floor")) {
-            this.occupant = occupant;
-        } else {
-            throw new IllegalStateException("Cannot place a unit on a non-empty cell.");
-        }
+    public void accept(Unit unit) {
+        terrain.accept(unit);
     }
 }
