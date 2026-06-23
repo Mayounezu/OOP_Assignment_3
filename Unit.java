@@ -4,18 +4,48 @@ public abstract class Unit{
     protected int healthAmount;
     protected int atkPts;
     protected int defPts;
+    protected Position position;
 
-    protected Unit(String name, int healthPool, int atkPts, int defPts){
-        this.name = name;
-        this.healthAmount = healthPool;
-        if (healthPool <= 0) {
-            this.healthPool = 1;
-        } else {
-            this.healthPool = healthPool;
-        }
-        this.atkPts = atkPts;
-        this.defPts = defPts;
-    }
+    
+protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
+
+this.name = name;
+
+this.healthAmount = healthPool;
+
+if (healthPool <= 0) {
+
+this.healthPool = 1;
+
+} else {
+
+this.healthPool = healthPool;
+
+}
+
+this.atkPts = atkPts;
+
+this.defPts = defPts;
+
+this.position = position;
+
+}
+
+public Position getPosition() {
+
+return position;
+
+}
+
+
+
+public void setPosition(Position p) {
+
+this.position = p;
+
+}
+
+
 
     public int getAtkPts() {
         return atkPts;
