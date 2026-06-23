@@ -11,7 +11,7 @@ public abstract class Unit{
 
 
     
-protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
+protected Unit(String name, Character tile, int healthPool, int atkPts, int defPts, Position position){
     this.name = name;
     this.healthAmount = healthPool;
     if (healthPool <= 0) {
@@ -22,6 +22,7 @@ protected Unit(String name, int healthPool, int atkPts, int defPts, Position pos
     this.atkPts = atkPts;
     this.defPts = defPts;
     this.position = position;
+    this.tile = tile;
     }
 
     public Position getPosition() {
