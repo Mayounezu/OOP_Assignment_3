@@ -5,9 +5,11 @@ public abstract class Unit{
     protected int atkPts;
     protected int defPts;
     protected Position position;
+    protected private Character tile;
+
 
     
-protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
+protected Unit(String name,Character tile, int healthPool, int atkPts, int defPts, Position position){
 
 this.name = name;
 
@@ -28,6 +30,7 @@ this.atkPts = atkPts;
 this.defPts = defPts;
 
 this.position = position;
+this.tile = tile;
 
 }
 
@@ -93,6 +96,9 @@ this.position = p;
         }
     }
 
+    public Character GetTile(){
+        return tile;
+    }
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {
             floor.setOccupant(this);
