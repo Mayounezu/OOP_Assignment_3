@@ -12,4 +12,11 @@ public class Cell{
     public void accept(Unit unit) {
         terrain.accept(unit);
     }
+    public String toString() {
+        if (terrain.getOccupant() != null) {
+            return terrain.getOccupant().toString();
+        } else {
+            return terrain.toString();
+        }
+    }
 }
