@@ -1,15 +1,12 @@
 import java.util.Random;
 
-
 public abstract class Monster extends Enemy {
 
 private int visionRange; // The radius in which the monster spots the player
 
+public Monster(String name, int healthPool, int atkPts, int defPts, Position position, int experienceValue, int visionRange){
 
-
-public Monster(String name, int healthPool, int atkPts, int defPts, int experienceValue, Position position, int visionRange){
-
-super(name, healthPool, atkPts, defPts, experienceValue,position);
+super(name, healthPool, atkPts, defPts,position,experienceValue);
 
 this.visionRange = visionRange;
 

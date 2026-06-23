@@ -1,6 +1,6 @@
 public abstract class Enemy extends Unit {
 
-private final int experienceValue; // Experience gained by the player when defeating this unit
+protected final int experienceValue; // Experience gained by the player when defeating this unit
 
 
 protected Enemy(String name,Character tile, int healthPool, int atkPts, int defPts, int experienceValue, Position position) {
