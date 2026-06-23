@@ -4,8 +4,9 @@ public abstract class Unit{
     private int healthAmount;
     private int atkPts;
     private int defPts;
+    private Character tile;
 
-    protected Unit(String name, int healthPool, int atkPts, int defPts){
+    protected Unit(String name,Character tile, int healthPool, int atkPts, int defPts){
         this.name = name;
         this.healthAmount = healthPool;
         if (healthPool <= 0) {
@@ -15,6 +16,7 @@ public abstract class Unit{
         }
         this.atkPts = atkPts;
         this.defPts = defPts;
+        this.tile = tile;
     }
 
     public int getAtkPts() {
@@ -61,5 +63,9 @@ public abstract class Unit{
         } else {
             this.healthPool = healthPool;
         }
+    }
+
+    public Character GetTile(){
+        return tile;
     }
 }
