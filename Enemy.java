@@ -3,9 +3,9 @@ public abstract class Enemy extends Unit {
 protected final int experienceValue; // Experience gained by the player when defeating this unit
 
 
-protected Enemy(String name, int healthPool, int atkPts, int defPts, Position position, int experienceValue) {
+protected Enemy(String name,Character tile, int healthPool, int atkPts, int defPts, int experienceValue, Position position) {
 
-super(name, healthPool, atkPts, defPts, position);
+super(name, tile, healthPool, atkPts, defPts, position);
 
 this.experienceValue = experienceValue;
 
@@ -48,7 +48,5 @@ return experienceValue;
 * over a List<Enemy> and call .processTurn() blindly without caring what it is.
 
 */
-
-public abstract Position processTurn(Player player);
 
 }
