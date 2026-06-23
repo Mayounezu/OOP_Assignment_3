@@ -76,9 +76,7 @@ protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, P
             this.healthPool = healthPool;
         }
     }
-
-
-    public abstract void accept(Unit unit);
+    public abstract void accept(Occupant occupant);
 
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {

@@ -65,9 +65,4 @@ public abstract class Monster extends Enemy {
             default: return myPos; // Stay in place
         }
     }
-    public void accept(Unit unit){
-        unit.visit(this);
-    }
-
-
 }

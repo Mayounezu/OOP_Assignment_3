@@ -1,3 +1,4 @@
 public interface Terrain {
-    public void accept(Unit unit);
+    public void accept(Occupant Occupant);
+    public String toString();
 }

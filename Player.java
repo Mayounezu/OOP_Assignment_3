@@ -31,7 +31,7 @@ public abstract class Player extends Unit
         ability.cast(position, enemies);
     }
 
-    public void accept(Unit unit){
-        unit.visit(this);
+    public void accept(Occupant occupant){
+        occupant.visit(this);
     }
 }

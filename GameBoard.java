@@ -12,6 +12,8 @@ public class GameBoard {
         return board[y][x];
     }
 
-
+    public Occupant getOccupantAt(Position position) {
+        return getCell(position.getX(), position.getY()).getTerrain().getOccupant();
+    }
 
 }
