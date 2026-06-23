@@ -81,6 +81,8 @@ protected Unit(String name, Character tile, int healthPool, int atkPts, int defP
     public Character GetTile(){
         return tile;
     }
+    public abstract void accept(Unit unit);
+
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {
             floor.setOccupant(this);
@@ -114,7 +116,5 @@ protected Unit(String name, Character tile, int healthPool, int atkPts, int defP
         setHealthAmount(healthAmount - damage);
     }
 
-    public void updateGameTick(){
-
-    }
+    public abstract void updateGameTick();
 }

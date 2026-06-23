@@ -6,7 +6,7 @@ public abstract class Player extends Unit
     protected Ability ability;
     protected List<Enemy> enemies;
 
-    protected Player(String name, '@', int healthPool, int atkPoints, int defPoints, Position position, Ability ability, List<Enemy> enemies)
+    protected Player(String name, int healthPool, int atkPoints, int defPoints, Position position, Ability ability, List<Enemy> enemies)
     {
         super(name,'@', healthPool, atkPoints, defPoints, position);
         this.enemies = enemies;
@@ -30,4 +30,9 @@ public abstract class Player extends Unit
     public void cast(){
         ability.cast(position, enemies);
     }
+
+    public void accept(Unit unit){
+        unit.visit(this);
+    }
+
 }
