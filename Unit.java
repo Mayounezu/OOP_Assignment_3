@@ -62,4 +62,6 @@ public abstract class Unit{
             this.healthPool = healthPool;
         }
     }
+
+    public abstract void updateGameTick();
 }

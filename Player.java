@@ -2,12 +2,13 @@ public abstract class Player extends Unit
 {
     protected int experience = 0;
     protected int level = 1;
+    protected Ability ability;
 
     protected Player(String name, int healthPool, int atkPoints, int defPoints)
     {
         super(name, healthPool, atkPoints, defPoints);
     }
-    private void levelUp(){
+    protected void levelUp(){
         experience -= (50 * level);
         level++;
         setHealthPool(getHealthPool() + (level * 10));
@@ -22,5 +23,7 @@ public abstract class Player extends Unit
             levelUp();
         }
     }
-    public abstract void cast();
+    public void cast(){
+        ability.cast();
+    }
 }
