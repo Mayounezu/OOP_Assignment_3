@@ -68,4 +68,6 @@ public abstract class Monster extends Enemy {
     public void accept(Unit unit){
         unit.visit(this);
     }
+
+
 }
