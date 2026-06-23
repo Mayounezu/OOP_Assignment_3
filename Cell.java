@@ -1,30 +1,15 @@
 public class Cell{
-    private final boolean isFloor;
-    private Unit occupant;
+    private final Terrain terrain;
 
-    public Cell(boolean isFloor) {
-        this.isFloor = isFloor;
-        this.occupant = null;
+    public Cell(Terrain terrain) {
+        this.terrain = terrain;
     }
 
-    public Cell(boolean isFloor, Unit occupant) {
-        this.isFloor = isFloor;
-        setOccupant(occupant);
+    public Terrain getTerrain() {
+        return terrain;
     }
 
-    public boolean getIsFloor() {
-        return isFloor;
-    }
-
-    public Unit getOccupant() {
-        return occupant;
-    }
-
-    public void setOccupant(Unit occupant) {
-        if (isFloor && this.occupant == null) {
-            this.occupant = occupant;
-        } else {
-            throw new IllegalStateException("Cannot place a unit on a non-empty floor, or the cell is a wall");
-        }
+    public void accept(Unit unit) {
+        terrain.accept(unit);
     }
 }

@@ -63,5 +63,16 @@ public abstract class Unit{
         }
     }
 
+    public void visit(Floor floor){
+        if (floor.getOccupant() == null) {
+            floor.setOccupant(this);
+        } else {
+            throw new IllegalStateException("Cannot place a unit on a non-empty floor");
+        }
+    }
+    public void visit(Wall wall){
+        throw new IllegalStateException("Cannot place a unit on a wall");
+    }
+    
     public abstract void updateGameTick();
 }
