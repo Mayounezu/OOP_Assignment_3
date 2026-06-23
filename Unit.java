@@ -5,6 +5,8 @@ public abstract class Unit{
     protected int atkPts;
     protected int defPts;
     protected Position position;
+    protected private Character tile;
+
 
     
 protected Unit(String name, int healthPool, int atkPts, int defPts, Position position){
@@ -76,12 +78,9 @@ protected Unit(String name, int healthPool, int atkPts, int defPts, Position pos
         }
     }
 
-    public void visit(Wall wall){
-        throw new IllegalStateException("Cannot place a unit on a wall");
+    public Character GetTile(){
+        return tile;
     }
-    
-    public abstract void updateGameTick();
-
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {
             floor.setOccupant(this);
