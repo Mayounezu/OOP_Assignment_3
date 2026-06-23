@@ -25,4 +25,9 @@ public class Warrior extends Player {
             cooldown--;
         }
     }
+
+    @Override
+    public String description() {
+        return "";
+    }
 }
