@@ -1,17 +1,17 @@
 import java.util.Random;
 
-public abstract class Unit{
+public abstract class Unit extends Occupant{
     protected final String name;
     protected int healthPool;
     protected int healthAmount;
     protected int atkPts;
     protected int defPts;
     protected Position position;
-    protected Character tile;
 
 
     
-protected Unit(String name, Character tile, int healthPool, int atkPts, int defPts, Position position){
+protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, Position position){
+    super(tile);
     this.name = name;
     this.healthAmount = healthPool;
     if (healthPool <= 0) {
@@ -22,7 +22,6 @@ protected Unit(String name, Character tile, int healthPool, int atkPts, int defP
     this.atkPts = atkPts;
     this.defPts = defPts;
     this.position = position;
-    this.tile = tile;
     }
 
     public Position getPosition() {
@@ -78,9 +77,7 @@ protected Unit(String name, Character tile, int healthPool, int atkPts, int defP
         }
     }
 
-    public Character GetTile(){
-        return tile;
-    }
+
     public abstract void accept(Unit unit);
 
     public void visit(Floor floor){
@@ -117,4 +114,6 @@ protected Unit(String name, Character tile, int healthPool, int atkPts, int defP
     }
 
     public abstract void updateGameTick();
+
+
 }
