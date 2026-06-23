@@ -1,3 +1,4 @@
+import java.util.List;
 public class Mage extends Player{
     private int range;
     private int manaPool;
@@ -5,8 +6,8 @@ public class Mage extends Player{
     private int manaCost;
     private int spellPower;
     private int hitCount;
-    public Mage(String name, int healthPool, int atkPoints, int defPoints, int range, int manaPool, int manaCost, int spellPower, int hitCount, Position position){
-        super(name, healthPool, atkPoints, defPoints, position, new MageAbility(hitCount, spellPower, range));
+    public Mage(String name, int healthPool, int atkPoints, int defPoints, int range, int manaPool, int manaCost, int spellPower, int hitCount, Position position, List<Enemy> enemies){
+        super(name, healthPool, atkPoints, defPoints, position, new MageAbility(hitCount, spellPower, range), enemies);
         this.range = range;
         this.manaPool = manaPool;
         this.manaCost = manaCost;
