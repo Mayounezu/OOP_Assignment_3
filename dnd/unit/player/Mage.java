@@ -15,13 +15,21 @@ public class Mage extends Player implements HeroicUnit{
     private int spellPower;
     private int hitCount;
     public Mage(String name, int healthPool, int atkPoints, int defPoints, int range, int manaPool, int manaCost, int spellPower, int hitCount, Position position, List<Enemy> enemies){
-        super(name, healthPool, atkPoints, defPoints, position, new MageAbility(hitCount, spellPower, range), enemies);
+        super(name, healthPool, atkPoints, defPoints, position, null, enemies);
         this.range = range;
         this.manaPool = manaPool;
         this.manaCost = manaCost;
         this.spellPower = spellPower;
         this.hitCount = hitCount;
         currentMana = manaPool / 4;
+        this.ability = new MageAbility(this, hitCount, range);
+    }
+
+    public int getSpellPower() {
+        return spellPower;
+    }
+    public int getCurrentMana() {
+        return currentMana;
     }
     public void levelUp(){
         super.levelUp();
@@ -35,7 +43,8 @@ public class Mage extends Player implements HeroicUnit{
 
     @Override
     public String description() {
-        return "";
+        return baseStatus() + " | Level: " + getLevel() + " | XP: " + getExperience() + "/" + (50 * getLevel())
+                + " | Mana: " + currentMana + "/" + manaPool + " | Spell Power: " + spellPower;
     }
 
     public void castAbility(){
@@ -43,5 +52,6 @@ public class Mage extends Player implements HeroicUnit{
             throw new RuntimeException("Not enough mana for Blizzard");
         }
         super.castAbility();
+        currentMana -= manaCost;
     }
 }

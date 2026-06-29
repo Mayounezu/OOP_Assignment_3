@@ -16,7 +16,7 @@ public class CLI implements GameObserver, InputProvider {
     public Player selectPlayer(List<Player> options) {
         System.out.println("Choose your character:");
         for (int i = 0; i < options.size(); i++) {
-            System.out.println((i + 1) + ". " + options.get(i).getName());
+            System.out.println((i + 1) + ". " + options.get(i).description());
         }
         while (true) {
             System.out.print("Enter choice: ");
@@ -48,7 +48,7 @@ public class CLI implements GameObserver, InputProvider {
     @Override
     public void onRoundComplete(GameBoard board, Player player) {
         System.out.println(board);
-        System.out.println(player.getName() + " - " + player.description());
+        System.out.println(player.description());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CLI implements GameObserver, InputProvider {
 
     @Override
     public void onLevelUp(Player player) {
-        System.out.println(player.getName() + " leveled up! Now level " + player.getLevel() + ".");
+        System.out.println(player.getName() + " leveled up! Now: " + player.description());
     }
 
     @Override

@@ -90,6 +90,6 @@ public class Monster extends Enemy {
 
     @Override
     public String description() {
-        return "";
+        return baseStatus() + " | Vision Range: " + visionRange + " | Exp Value: " + getExperienceValue();
     }
 }

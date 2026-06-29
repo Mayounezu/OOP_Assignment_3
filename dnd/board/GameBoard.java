@@ -9,6 +9,10 @@ public class GameBoard {
         board = new Cell[height][width];
     }
 
+    public Cell getCell(Position p) {
+        return getCell(p.getX(), p.getY());
+    }
+
     public Cell getCell(int x, int y) {
         if (x < 0 || x >= board[0].length || y < 0 || y >= board.length) {
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
@@ -36,7 +40,7 @@ public class GameBoard {
         StringBuilder sb = new StringBuilder();
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
-                sb.append(board[y][x].getTerrain().toString());
+                sb.append(board[y][x].toString());
             }
             sb.append(System.lineSeparator());
         }

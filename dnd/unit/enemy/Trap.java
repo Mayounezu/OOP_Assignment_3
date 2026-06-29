@@ -20,20 +20,17 @@ public class Trap extends Enemy{
     }
 
     public void updateGameTick() {
-        ticks_count++;
-        if (visible) {
-            if (ticks_count == visibility_time)
-                visible = false;
-            else {
-                if (ticks_count == invisibility_time)
-                    visible = true;
-            }
+        visible = ticks_count < visibility_time;
+        if (ticks_count == visibility_time + invisibility_time) {
+            ticks_count = 0;
+        } else {
+            ticks_count++;
         }
     }
 
     @Override
     public String description() {
-        return "An immobile enemy that toggles visibility and attacks players within range two.";
+        return baseStatus() + " | Visible: " + visible + " | Exp Value: " + getExperienceValue();
     }
 
     @Override
