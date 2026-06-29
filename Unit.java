@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Unit extends Occupant{
+public abstract class Unit extends Occupant implements CellVisitor, OccupantVisitor {
     protected final String name;
     protected int healthPool;
     protected int healthAmount;
@@ -10,18 +10,19 @@ public abstract class Unit extends Occupant{
 
 
     
-protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, Position position){
-    super(tile);
-    this.name = name;
-    this.healthAmount = healthPool;
-    if (healthPool <= 0) {
-    this.healthPool = 1;
-    } else {
-    this.healthPool = healthPool;
-    }
-    this.atkPts = atkPts;
-    this.defPts = defPts;
-    this.position = position;
+    protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, Position position){
+        super(tile);
+        this.name = name;
+        this.healthAmount = healthPool;
+        if (healthPool <= 0) {
+        this.healthPool = 1;
+        }
+        else {
+        this.healthPool = healthPool;
+        }
+        this.atkPts = atkPts;
+        this.defPts = defPts;
+        this.position = position;
     }
 
     public Position getPosition() {
@@ -76,7 +77,7 @@ protected Unit(String name, char tile, int healthPool, int atkPts, int defPts, P
             this.healthPool = healthPool;
         }
     }
-    public abstract void accept(Occupant occupant);
+    public abstract void accept(OccupantVisitor visitor);
 
     public void visit(Floor floor){
         if (floor.getOccupant() == null) {
