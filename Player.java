@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Random;
+
 public abstract class Player extends Unit
 {
     protected int experience = 0;
@@ -33,5 +35,22 @@ public abstract class Player extends Unit
 
     public void accept(OccupantVisitor visitor){
         visitor.visit(this);
+    }
+
+    public void visit(Player player){
+        throw new UnsupportedOperationException("Players cannot battle other players");
+    }
+
+    public void visit(Enemy enemy){
+        startBattle(enemy);
+    }
+
+    public void startBattle(Enemy enemy){
+        Random rand = new Random();
+        int atkRoll = rand.nextInt(atkPts);
+        int defRoll = rand.nextInt(enemy.getDefPts());
+        if (atkRoll > defRoll) {
+            enemy.dealDamage(atkRoll - defRoll);
+        }
     }
 }
