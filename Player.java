@@ -27,7 +27,7 @@ public abstract class Player extends Unit
             levelUp();
         }
     }
-    public void cast(){
+    public void castAbility(){
         ability.cast(position, enemies);
     }
 

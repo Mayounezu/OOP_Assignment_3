@@ -22,6 +22,7 @@ public class Monster extends Enemy {
      * * @param player The active player instance, passed in so the monster can inspect its coordinates.
      * @return The Position the monster WANTS to step into.
      */
+    @Override
     public Position processTurn(Player player) {
         Position myPos = this.getPosition();
         Position playerPos = player.getPosition();
@@ -66,10 +67,6 @@ public class Monster extends Enemy {
         }
     }
 
-    @Override
-    public void processTurn() {
-
-    }
 
     @Override
     public void updateGameTick() {

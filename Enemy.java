@@ -16,5 +16,5 @@ public abstract class Enemy extends Unit {
         occupant.visit(this);
     }
 
-    public abstract void processTurn();
+    public abstract Position processTurn(Player player);
 }
