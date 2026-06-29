@@ -12,8 +12,8 @@ public abstract class Enemy extends Unit {
     }
 
     @Override
-    public void accept(Occupant occupant) {
-        occupant.visit(this);
+    public void accept(OccupantVisitor visitor) {
+        visitor.visit(this);
     }
 
     public abstract void processTurn();
