@@ -22,11 +22,9 @@ public abstract class Enemy extends Unit {
         player.startBattle(this);
     }
 
+    public abstract Position processTurn(Player player);
+    
     public void visit(Enemy enemy){
         throw new UnsupportedOperationException("Enemies cannot battle other enemies");
     }
-
-
-
-    public abstract void processTurn();
 }

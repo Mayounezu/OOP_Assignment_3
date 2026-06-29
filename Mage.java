@@ -1,5 +1,5 @@
 import java.util.List;
-public class Mage extends Player{
+public class Mage extends Player implements HeroicUnit{
     private int range;
     private int manaPool;
     private int currentMana;
@@ -30,10 +30,10 @@ public class Mage extends Player{
         return "";
     }
 
-    public void cast(){
+    public void castAbility(){
         if(currentMana < manaCost){
             throw new RuntimeException("Not enough mana for Blizzard");
         }
-        super.cast();
+        super.castAbility();
     }
 }
