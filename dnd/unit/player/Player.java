@@ -50,6 +50,18 @@ public abstract class Player extends Unit
     }
 
     public void visit(Enemy enemy){
-        startBattle(enemy);
+        lastCombatResult = startBattle(enemy);
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
     }
 }

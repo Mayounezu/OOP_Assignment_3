@@ -1,6 +1,9 @@
 package dnd.unit.enemy;
 
+import dnd.board.GameBoard;
 import dnd.board.Position;
+import dnd.unit.CombatResult;
+import dnd.unit.player.Player;
 
 public class Trap extends Enemy{
     private int visibility_time;
@@ -8,17 +11,13 @@ public class Trap extends Enemy{
     private int ticks_count;
     private boolean visible;
 
-    Trap(String name,Character tile, int healthPool, int atkPts, int defPts,int experience_value ,int visibility_time,int invisibility_time, Position position) {
+    public Trap(String name,Character tile, int healthPool, int atkPts, int defPts,int experience_value ,int visibility_time,int invisibility_time, Position position) {
         super(name, tile, healthPool,  atkPts,  defPts, experience_value, position);
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
         this.ticks_count = 0;
         visible = true;
     }
-
-    //void attack(Player p){
-
-
 
     public void updateGameTick() {
         ticks_count++;
@@ -46,15 +45,12 @@ public class Trap extends Enemy{
     }
 
     @Override
-    public void processTurn() {
-
+    public CombatResult processTurn(GameBoard board, Player player) {
+        updateGameTick();
+        if (getPosition().distance(player.getPosition()) < 2) {
+            return startBattle(player);
+        }
+        return null;
     }
-
-    /*
-    void checkRange(Player p){
-        if p.GetPosition().distance(this.position);
-            attack()
-    }
-     */
 
 }
