@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Enemy extends Unit {
 
     protected final int experienceValue;
@@ -12,9 +14,17 @@ public abstract class Enemy extends Unit {
     }
 
     @Override
-    public void accept(Occupant occupant) {
-        occupant.visit(this);
+    public void accept(OccupantVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void visit(Player player){
+        player.startBattle(this);
     }
 
     public abstract Position processTurn(Player player);
+    
+    public void visit(Enemy enemy){
+        throw new UnsupportedOperationException("Enemies cannot battle other enemies");
+    }
 }

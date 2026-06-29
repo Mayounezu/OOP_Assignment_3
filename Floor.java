@@ -21,8 +21,8 @@ public class Floor implements Terrain {
     }
 
     @Override
-    public void accept(Occupant occupant) {
-        occupant.visit(this);
+    public void accept(CellVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
