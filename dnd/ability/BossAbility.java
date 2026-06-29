@@ -3,7 +3,7 @@ package dnd.ability;
 import dnd.board.Position;
 import dnd.unit.player.Player;
 
-public class BossAbility implements Ability{
+public class BossAbility {
 
     private int atk;
     private int visionRange;

@@ -14,6 +14,9 @@ public abstract class Occupant implements CellVisitor {
     public String toString() {
         return "" + tile;
     }
+    public void setTile(char tile) {
+        this.tile = tile;
+    }
     public abstract void accept(OccupantVisitor visitor);
     public abstract void visit(Floor floor);
     public abstract void visit(Wall wall);

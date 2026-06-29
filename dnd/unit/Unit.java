@@ -2,7 +2,9 @@ package dnd.unit;
 
 import java.util.Random;
 
+import dnd.board.Cell;
 import dnd.board.Floor;
+import dnd.board.GameBoard;
 import dnd.board.Position;
 import dnd.board.Wall;
 import dnd.occupant.Occupant;
@@ -17,6 +19,7 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
     protected int atkPts;
     protected int defPts;
     protected Position position;
+    protected CombatResult lastCombatResult;
 
 
 
@@ -109,13 +112,59 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
         setHealthAmount(healthAmount - damage);
     }
 
-    public void startBattle(Unit unit){
+    public CombatResult startBattle(Unit unit){
         Random rand = new Random();
         int atkRoll = rand.nextInt(atkPts);
         int defRoll = rand.nextInt(unit.getDefPts());
+        int damage = 0;
         if (atkRoll > defRoll) {
-            unit.dealDamage(atkRoll - defRoll);
+            damage = atkRoll - defRoll;
+            unit.dealDamage(damage);
         }
+        boolean defenderDied = unit.getHealthAmount() <= 0;
+        return new CombatResult(this, unit, atkRoll, defRoll, damage, defenderDied);
+    }
+
+    public CombatResult getLastCombatResult() {
+        return lastCombatResult;
+    }
+
+    public void clearCombatResult() {
+        lastCombatResult = null;
+    }
+
+    /**
+     * Attempts to step onto the cell at {@code target}. Goes through the same
+     * CellVisitor/OccupantVisitor double-dispatch chain used for movement and combat,
+     * then resolves the board-level bookkeeping (vacating the old cell, taking over a
+     * defeated defender's cell) that the visitor chain itself cannot do, since neither
+     * Floor nor the visitors know this unit's previous position.
+     */
+    public CombatResult attemptStep(GameBoard board, Position target) {
+        clearCombatResult();
+        Cell cell;
+        try {
+            cell = board.getCell(target.getX(), target.getY());
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+        boolean wasOccupied = cell.getTerrain().getOccupant() != null;
+        try {
+            cell.accept(this);
+        } catch (RuntimeException e) {
+            return null;
+        }
+        CombatResult result = getLastCombatResult();
+        if (!wasOccupied) {
+            board.setOccupant(this.position, null);
+            this.position = target;
+        } else if (result != null && result.isDefenderDied()) {
+            board.setOccupant(this.position, null);
+            board.setOccupant(target, null);
+            board.setOccupant(target, this);
+            this.position = target;
+        }
+        return result;
     }
 
     public abstract void updateGameTick();

@@ -2,7 +2,9 @@ package dnd.unit.enemy;
 
 import java.util.Random;
 
+import dnd.board.GameBoard;
 import dnd.board.Position;
+import dnd.unit.CombatResult;
 import dnd.unit.player.Player;
 
 public class Monster extends Enemy {
@@ -24,11 +26,10 @@ public class Monster extends Enemy {
 
     /**
      * Resolves the Monster's movement choice for this game tick.
-     * * @param player The active player instance, passed in so the monster can inspect its coordinates.
+     * @param player The active player instance, passed in so the monster can inspect its coordinates.
      * @return The Position the monster WANTS to step into.
      */
-    @Override
-    public Position processTurn(Player player) {
+    public Position decideMove(Player player) {
         Position myPos = this.getPosition();
         Position playerPos = player.getPosition();
 
@@ -38,6 +39,15 @@ public class Monster extends Enemy {
         } else {
             return wanderRandomly(myPos);
         }
+    }
+
+    @Override
+    public CombatResult processTurn(GameBoard board, Player player) {
+        Position target = decideMove(player);
+        if (target.getX() == getPosition().getX() && target.getY() == getPosition().getY()) {
+            return null;
+        }
+        return attemptStep(board, target);
     }
 
     private Position chasePlayer(Position myPos, Position playerPos) {

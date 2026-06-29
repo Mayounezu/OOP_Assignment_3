@@ -1,6 +1,8 @@
 package dnd.unit.enemy;
 
+import dnd.board.GameBoard;
 import dnd.board.Position;
+import dnd.unit.CombatResult;
 import dnd.unit.Unit;
 import dnd.unit.player.Player;
 import dnd.visitor.OccupantVisitor;
@@ -24,12 +26,12 @@ public abstract class Enemy extends Unit {
     }
 
     public void visit(Player player){
-        startBattle(player);
+        lastCombatResult = startBattle(player);
     }
 
     public void visit(Enemy enemy){
         throw new UnsupportedOperationException("Enemies cannot battle other enemies");
     }
 
-    public abstract void processTurn();
+    public abstract CombatResult processTurn(GameBoard board, Player player);
 }

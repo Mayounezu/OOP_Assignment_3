@@ -19,7 +19,7 @@ public class Floor implements Terrain {
     }
 
     public void setOccupant(Occupant occupant) {
-        if (this.occupant != null) {
+        if (occupant != null && this.occupant != null) {
             throw new IllegalStateException("Cannot place a unit on a non-empty floor");
         }
         this.occupant = occupant;

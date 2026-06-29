@@ -16,6 +16,13 @@ public class GameBoard {
         return board[y][x];
     }
 
+    public void setCell(int x, int y, Cell cell) {
+        if (x < 0 || x >= board[0].length || y < 0 || y >= board.length) {
+            throw new IndexOutOfBoundsException("Coordinates out of bounds");
+        }
+        board[y][x] = cell;
+    }
+
     public Occupant getOccupant(Position position) {
         return getCell(position.getX(), position.getY()).getTerrain().getOccupant();
     }
@@ -24,12 +31,15 @@ public class GameBoard {
         getCell(position.getX(), position.getY()).getTerrain().setOccupant(occupant);
     }
 
-    public void render(){
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
-                System.out.print(board[y][x].getTerrain().toString());
+                sb.append(board[y][x].getTerrain().toString());
             }
-            System.out.println();
+            sb.append(System.lineSeparator());
         }
+        return sb.toString();
     }
 }
