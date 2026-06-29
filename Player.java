@@ -44,13 +44,4 @@ public abstract class Player extends Unit
     public void visit(Enemy enemy){
         startBattle(enemy);
     }
-
-    public void startBattle(Enemy enemy){
-        Random rand = new Random();
-        int atkRoll = rand.nextInt(atkPts);
-        int defRoll = rand.nextInt(enemy.getDefPts());
-        if (atkRoll > defRoll) {
-            enemy.dealDamage(atkRoll - defRoll);
-        }
-    }
 }
