@@ -1,7 +1,6 @@
 package dnd.unit.player;
 
 import java.util.List;
-import java.util.Random;
 
 import dnd.ability.Ability;
 import dnd.board.Position;
@@ -26,14 +25,16 @@ public abstract class Player extends Unit
         experience -= (50 * level);
         level++;
         setHealthPool(getHealthPool() + (level * 10));
-        setHealthAmount(getHealthAmount() + (level * 10));
+        setHealthAmount(getHealthPool());
         setAtkPts(getAtkPts() + (level * 4));
         setDefPts(getDefPts() + level);
     }
     public void gainExperience(int experience)
     {
         this.experience += experience;
-        if(this.experience > level * 50){
+        // A single kill may grant enough XP for several levels at once; levelUp() carries
+        // the leftover XP over, so loop until the remaining XP is below the next threshold.
+        while(this.experience >= level * 50){
             levelUp();
         }
     }
@@ -63,5 +64,10 @@ public abstract class Player extends Unit
 
     public List<Enemy> getEnemies() {
         return enemies;
+    }
+
+    @Override
+    public boolean vacatesCellOnDeath() {
+        return false;
     }
 }

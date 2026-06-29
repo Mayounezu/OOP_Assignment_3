@@ -113,9 +113,8 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
     }
 
     public CombatResult startBattle(Unit unit){
-        Random rand = new Random();
-        int atkRoll = rand.nextInt(atkPts);
-        int defRoll = rand.nextInt(unit.getDefPts());
+        int atkRoll = rollAttack();
+        int defRoll = unit.rollDefense();
         int damage = 0;
         if (atkRoll > defRoll) {
             damage = atkRoll - defRoll;
@@ -123,6 +122,14 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
         }
         boolean defenderDied = unit.getHealthAmount() <= 0;
         return new CombatResult(this, unit, atkRoll, defRoll, damage, defenderDied);
+    }
+
+    public int rollAttack() {
+        return new Random().nextInt(Math.max(atkPts, 1));
+    }
+
+    public int rollDefense() {
+        return new Random().nextInt(Math.max(defPts, 1));
     }
 
     public CombatResult getLastCombatResult() {
@@ -158,7 +165,7 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
         if (!wasOccupied) {
             board.setOccupant(this.position, null);
             this.position = target;
-        } else if (result != null && result.isDefenderDied()) {
+        } else if (result != null && result.isDefenderDied() && result.getDefender().vacatesCellOnDeath()) {
             board.setOccupant(this.position, null);
             board.setOccupant(target, null);
             board.setOccupant(target, this);
@@ -167,7 +174,20 @@ public abstract class Unit extends Occupant implements OccupantVisitor {
         return result;
     }
 
+    /**
+     * Whether this unit's cell becomes free for the attacker to move into when it dies.
+     * Enemies do (the player takes their position); the player does not (its corpse stays
+     * put, marked 'X', per spec) -- see {@link dnd.unit.player.Player#vacatesCellOnDeath()}.
+     */
+    public boolean vacatesCellOnDeath() {
+        return true;
+    }
+
     public abstract void updateGameTick();
+
+    protected String baseStatus() {
+        return name + " | HP: " + healthAmount + "/" + healthPool + " | ATK: " + atkPts + " | DEF: " + defPts;
+    }
 
     //returns the full status of the unit (override in each subclass).
     //Used during combat and on the player’s turn.

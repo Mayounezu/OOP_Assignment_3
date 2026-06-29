@@ -7,6 +7,7 @@ import java.util.List;
 
 import dnd.board.Position;
 import dnd.engine.Game;
+import dnd.engine.GameLogger;
 import dnd.io.LevelLoader;
 import dnd.ui.CLI;
 import dnd.unit.enemy.Enemy;
@@ -46,6 +47,8 @@ public class Main {
 
         Game game = new Game(player, levels);
         game.addObserver(cli);
+        String logName = player.getName().toLowerCase().replaceAll("[^a-z0-9]+", "_");
+        game.addObserver(new GameLogger("game_logs/log_" + logName + ".txt"));
         game.setInputProvider(cli);
         game.run();
     }

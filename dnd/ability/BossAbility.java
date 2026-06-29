@@ -1,32 +1,24 @@
 package dnd.ability;
 
-import dnd.board.Position;
+import dnd.unit.CombatResult;
+import dnd.unit.Unit;
 import dnd.unit.player.Player;
 
+/**
+ * Encapsulates the Boss "Shoebodybop" ability: the boss shoots the player for an amount
+ * equal to the boss's attack points, and the player tries to defend itself. Returns a
+ * CombatResult so the engine can report the shot through the same channel as melee combat.
+ */
 public class BossAbility {
 
-    private int atk;
-    private int visionRange;
-
-    public BossAbility(int atk, int visionRange) {
-        this.atk = atk;
-        this.visionRange = visionRange;
-    }
-
-    // The boss only targets the player, so we just pass the Player object
-    public void cast(Position bossPosition, Player player) {
-
-        // Calculate distance between the boss and the player
-        double distance = bossPosition.distance(player.getPosition());
-
-        // Check if the player is within vision range
-        if (distance < visionRange) {
-            // The player takes damage equal to the boss's attack points.
-            // (Assuming dealDamage handles the defense roll inside the Player class)
-            player.dealDamage(atk);
-        } else {
-            // Optional: You can throw an exception or just do nothing if the player is too far
-            throw new RuntimeException("Player is not in vision range of Shoebodybop");
+    public CombatResult cast(Unit boss, Player player) {
+        int attack = boss.getAtkPts();
+        int defRoll = player.rollDefense();
+        int damage = Math.max(0, attack - defRoll);
+        if (damage > 0) {
+            player.dealDamage(damage);
         }
+        boolean defenderDied = player.getHealthAmount() <= 0;
+        return new CombatResult(boss, player, attack, defRoll, damage, defenderDied);
     }
 }

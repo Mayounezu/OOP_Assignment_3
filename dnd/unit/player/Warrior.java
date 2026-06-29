@@ -11,7 +11,8 @@ public class Warrior extends Player implements HeroicUnit {
     private int cooldown = 0;
     private int maxCooldown;
     public Warrior(String name, int healthPool, int atkPoints, int defPoints, int maxCooldown, Position position, List<Enemy> enemies) {
-        super(name, healthPool, atkPoints, defPoints, position, new WarriorAbility(healthPool), enemies);
+        super(name, healthPool, atkPoints, defPoints, position, null, enemies);
+        this.ability = new WarriorAbility(this);
         this.maxCooldown = maxCooldown;
     }
     public void castAbility(){
@@ -19,6 +20,7 @@ public class Warrior extends Player implements HeroicUnit {
             throw new RuntimeException("Avenger's Shield is on cooldown");
         }
         super.castAbility();
+        cooldown = maxCooldown;
         setHealthAmount(Math.min(getHealthAmount() + 10 * getDefPts(), getHealthPool()));
     }
     public void levelUp(){
@@ -36,6 +38,7 @@ public class Warrior extends Player implements HeroicUnit {
 
     @Override
     public String description() {
-        return "";
+        return baseStatus() + " | Level: " + getLevel() + " | XP: " + getExperience() + "/" + (50 * getLevel())
+                + " | Cooldown: " + cooldown + "/" + maxCooldown;
     }
 }

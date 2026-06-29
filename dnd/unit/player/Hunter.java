@@ -12,9 +12,10 @@ public class Hunter extends Player implements HeroicUnit {
     private int arrows;
     private int ticksCount = 0;
     public Hunter(String name, int healthPool, int atkPoints, int defPoints, Position position, List<Enemy> enemies, int range){
-        super(name, healthPool, atkPoints, defPoints, position, new HunterAbility(atkPoints, range), enemies);
+        super(name, healthPool, atkPoints, defPoints, position, null, enemies);
         this.range = range;
         arrows = level * 10;
+        this.ability = new HunterAbility(this, range);
     }
     public void levelUp(){
         super.levelUp();
@@ -36,9 +37,15 @@ public class Hunter extends Player implements HeroicUnit {
             throw new RuntimeException("Out of arrows can't Shoot");
         }
         super.castAbility();
+        arrows--;
     }
 
     public String description(){
-        return "The Hunter is a player class that uses arrows to shoot the closest enemy within range.  ";
+        return baseStatus() + " | Level: " + getLevel() + " | XP: " + getExperience() + "/" + (50 * getLevel())
+                + " | Arrows: " + arrows;
+    }
+
+    public int getArrows() {
+        return arrows;
     }
 }

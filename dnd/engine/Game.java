@@ -49,9 +49,7 @@ public class Game {
                 player.updateGameTick();
                 checkLevelComplete();
             }
-            if (!gameOver) {
-                notifyRoundComplete();
-            }
+            notifyRoundComplete();
         }
         notifyGameOver(playerWon);
     }
@@ -88,6 +86,8 @@ public class Game {
         }
         notifyCombat(result);
         if (result.isDefenderDied() && targetEnemy != null) {
+            notifyMessage(player.getName() + " killed " + targetEnemy.getName()
+                    + " and gained " + targetEnemy.getExperienceValue() + " experience.");
             grantExperience(targetEnemy.getExperienceValue());
             enemies.remove(targetEnemy);
         }
@@ -108,6 +108,8 @@ public class Game {
         while (it.hasNext()) {
             Enemy e = it.next();
             if (e.getHealthAmount() <= 0) {
+                notifyMessage(player.getName() + " killed " + e.getName()
+                        + " and gained " + e.getExperienceValue() + " experience.");
                 grantExperience(e.getExperienceValue());
                 board.setOccupant(e.getPosition(), null);
                 it.remove();
