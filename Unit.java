@@ -91,22 +91,9 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
         throw new IllegalArgumentException("Cannot move into a wall");
     }
 
-    public void visit(Player player){
-        startBattle(player);
-    }
+    public abstract void visit(Player player);
 
-    public void visit(Enemy enemy){
-        startBattle(enemy);
-    }
-
-    public void startBattle(Unit enemy){
-        Random rand = new Random();
-        int atkRoll = rand.nextInt(atkPts);
-        int defRoll = rand.nextInt(enemy.getDefPts());
-        if (atkRoll > defRoll) {
-            enemy.dealDamage(atkRoll - defRoll);
-        }
-    }
+    public abstract void visit(Enemy enemy);
 
     public void dealDamage(int damage){
         setHealthAmount(healthAmount - damage);
