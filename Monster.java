@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Monster extends Enemy {
+public class Monster extends Enemy {
 
     private int visionRange; // The radius in which the monster spots the player
 
@@ -22,6 +22,7 @@ public abstract class Monster extends Enemy {
      * * @param player The active player instance, passed in so the monster can inspect its coordinates.
      * @return The Position the monster WANTS to step into.
      */
+    @Override
     public Position processTurn(Player player) {
         Position myPos = this.getPosition();
         Position playerPos = player.getPosition();
@@ -64,5 +65,16 @@ public abstract class Monster extends Enemy {
             case 3: return new Position(myPos.getX(), myPos.getY() + 1); // Move Down
             default: return myPos; // Stay in place
         }
+    }
+
+
+    @Override
+    public void updateGameTick() {
+
+    }
+
+    @Override
+    public String description() {
+        return "";
     }
 }

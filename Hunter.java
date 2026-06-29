@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Hunter extends Player {
+public class Hunter extends Player implements HeroicUnit {
     private int range;
     private int arrows;
     private int ticksCount = 0;
@@ -24,10 +24,14 @@ public class Hunter extends Player {
             ticksCount++;
         }
     }
-    public void cast() {
+    public void castAbility() {
         if (arrows <= 0) {
             throw new RuntimeException("Out of arrows can't Shoot");
         }
-        super.cast();
+        super.castAbility();
+    }
+
+    public String description(){
+        return "The Hunter is a player class that uses arrows to shoot the closest enemy within range.  ";
     }
 }

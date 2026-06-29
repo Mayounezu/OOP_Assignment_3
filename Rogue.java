@@ -1,5 +1,5 @@
 import java.util.List;
-public class Rogue extends Player {
+public class Rogue extends Player implements HeroicUnit {
     private int energy = 100;
     private int cost;
     public Rogue(String name, int healthPool, int atkPoints, int defPoints,int cost, Position position, List<Enemy> enemies) {
@@ -11,11 +11,11 @@ public class Rogue extends Player {
         energy = 100;
         setAtkPts(getAtkPts() + (level * 3));
     }
-    public void cast(){
+    public void castAbility(){
         if(energy < cost){
             throw new RuntimeException("Not enough energy to cast Fan Of Knives");
         }
-        super.cast();
+        super.castAbility();
     }
     public void updateGameTick(){
         energy = Math.min(energy + 10, 100);
