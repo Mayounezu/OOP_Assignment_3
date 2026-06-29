@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Unit extends Occupant implements CellVisitor, OccupantVisitor {
+public abstract class Unit extends Occupant implements OccupantVisitor {
     protected final String name;
     protected int healthPool;
     protected int healthAmount;
@@ -97,6 +97,15 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
 
     public void dealDamage(int damage){
         setHealthAmount(healthAmount - damage);
+    }
+
+    public void startBattle(Unit unit){
+        Random rand = new Random();
+        int atkRoll = rand.nextInt(atkPts);
+        int defRoll = rand.nextInt(unit.getDefPts());
+        if (atkRoll > defRoll) {
+            unit.dealDamage(atkRoll - defRoll);
+        }
     }
 
     public abstract void updateGameTick();

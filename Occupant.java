@@ -12,6 +12,4 @@ public abstract class Occupant implements CellVisitor {
     public abstract void accept(OccupantVisitor visitor);
     public abstract void visit(Floor floor);
     public abstract void visit(Wall wall);
-    public abstract void visit(Player player);
-    public abstract void visit(Enemy enemy);
 }
